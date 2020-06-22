@@ -71,7 +71,7 @@ elsif @deck_type == "exit"
   exit
 else
   puts "Invalid input. Put either major or minor."
-  sleep(1.2)
+  sleep(1)
   system("clear")
 main_menu
 end
@@ -112,6 +112,7 @@ def get_suit
   else
   puts "Invalid input, please pick a valid suit"
   puts "Ex 'wands'"
+  sleep(1)
   system("clear")
   minor_menu
 end
