@@ -14,19 +14,11 @@ attr_accessor :cards,:major, :minor, :current_card, :wands, :cups, :pentacles, :
   def greet
     @greeting = Greeting.new
     @count = 0
-    until @count == 15
     system("clear")
- if @count % 4 == 0
-    puts "Welcome to the World of Tarot"
-  elsif @count % 4 == 1
-    puts "Welcome to the World of Tarot"
-  elsif @count % 4 == 2
-    puts "Welcome to the World of Tarot"
-  elsif @count % 4 == 3
-    puts "Welcome to the World of Tarot"
-  end
-  @count += 1
-end
+    puts "Welcome to the World of Tarot".red
+    puts "Welcome to the World of Tarot".blue
+    puts "Welcome to the World of Tarot".yellow
+    puts "Welcome to the World of Tarot".green
     puts ""
     @greeting.art
     puts ""
@@ -38,7 +30,7 @@ get_user_input
 end
 
 def get_user_input
-puts "Press Enter To Continue"
+puts "Type anything and press enter To Continue"
 user_input = gets.strip
 main_menu if user_input
 end
@@ -80,7 +72,8 @@ elsif @deck_type == "exit"
 else
   puts "Invalid input. Put either major or minor."
   sleep(1.2)
-  get_deck_type
+  system("clear")
+main_menu
 end
 end
 
@@ -119,8 +112,9 @@ def get_suit
   else
   puts "Invalid input, please pick a valid suit"
   puts "Ex 'wands'"
-  get_suit
-  end
+  system("clear")
+  minor_menu
+end
   list_suit(@current_suit_deck, @current_suit)
 end
 
@@ -219,6 +213,7 @@ puts "Enter 'cards' to go back to the list of the cards in this suit."
 puts "Enter 'suits' to go back to the list of minor the suits cards."
 puts "Enter 'next' to see the next card in the minor arcana"
 puts "Enter 'back' to see the previous card in the minor arcana"
+puts "Enter 'exit' to exit the program"
 puts "Enter 'restart' to restart from welcome screen"
 get_next_move_minor(suit)
 end
@@ -230,6 +225,7 @@ puts "Enter 'major' to go back to the list of major arcana cards"
 puts "Enter 'next' to see the next card in the major arcana"
 puts "Enter 'back' to see the previous card in the major arcana"
 puts "Enter 'restart' to restart from welcome screen"
+puts "Enter 'exit' to exit the program"
 get_next_move_major
 end
 
@@ -268,14 +264,16 @@ elsif user_input == "restart"
     run
   elsif user_input == "exit"
     puts "Goodbye!!"
-    system("clear")
     sleep(2)
+    system("clear")
     exit
   elsif user_input == "suits"
     minor_menu
   else
     puts "Invalid input. Please try again."
     sleep(1.5)
+    system("clear")
+    @current_card.info
     prompt_for_input_minor(suit)
   end
 end
@@ -315,12 +313,14 @@ elsif user_input == "restart"
     run
   elsif user_input == "exit"
     puts "Goodbye!!"
-    system("clear")
     sleep(2)
+    system("clear")
     exit
   else
     puts "Invalid input. Please try again."
     sleep(1.5)
+    system("clear")
+    @current_card.info
     prompt_for_input_major
   end
 end

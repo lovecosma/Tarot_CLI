@@ -3,6 +3,7 @@ require 'pry'
 require 'net/http'
 require 'open-uri'
 require 'json'
+require 'colorize'
 
 require_relative "./Tarot_CLI_Project/version"
 require_relative './api.rb'

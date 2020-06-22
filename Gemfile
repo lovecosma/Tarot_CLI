@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 gem 'nokogiri'
 gem 'pry'
+gem 'colorize'
 # Specify your gem's dependencies in Tarot_CLI_Project.gemspec
 # gemspec
 
