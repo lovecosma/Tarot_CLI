@@ -1,5 +1,5 @@
 class Cli
-attr_accessor :cards,:major, :minor, :current_card, :wands, :cups, :pentacles, :swords, :current_suit, :current_suit_deck
+attr_accessor :cards,:major, :minor, :current_card, :wands, :cups, :pentacles, :swords, :current_suit, :current_suit_deck, :minor_range, :major_range
   def run
     system("clear")
     Card.destroy_all
@@ -16,10 +16,14 @@ attr_accessor :cards,:major, :minor, :current_card, :wands, :cups, :pentacles, :
     @count = 0
     until @count == 15
     system("clear")
- if @count % 2 == 0
+ if @count % 4 == 0
     puts "Welcome to the World of Tarot"
-  else
-    puts ""
+  elsif @count % 4 == 1
+    puts "Welcome to the World of Tarot"
+  elsif @count % 4 == 2
+    puts "Welcome to the World of Tarot"
+  elsif @count % 4 == 3
+    puts "Welcome to the World of Tarot"
   end
   @count += 1
 end
@@ -115,6 +119,7 @@ def get_suit
   else
   puts "Invalid input, please pick a valid suit"
   puts "Ex 'wands'"
+  get_suit
   end
   list_suit(@current_suit_deck, @current_suit)
 end
@@ -124,7 +129,7 @@ system("clear")
 array = []
 array << "#{suit}"
 array << ""
-array_of.each {|card| array << "#{card.value_int}. #{card.name}"}
+array_of.each {|card| array << "#{card.value_int} #{card.name}"}
 array.each {|element| puts "#{element}"}
 puts ""
 puts ""
@@ -137,36 +142,41 @@ end
 
 def get_card_minor(suit)
 user_input = gets.strip
-if suit == "wands"
+@suit = suit
+@minor_range = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+if @minor_range.include?(user_input.to_i)
+if @suit == "wands"
 @current_card = Card.wands.find do |card|
 card.value_int == user_input.to_i
 end
 system("clear")
 @current_card.info
-elsif suit == "cups"
+prompt_for_input_minor(@suit)
+elsif @suit == "cups"
 @current_card = Card.cups.find do |card|
 card.value_int == user_input.to_i
 end
 system("clear")
 @current_card.info
-elsif suit == "pentacles"
+prompt_for_input_minor(@suit)
+elsif @suit == "pentacles"
 @current_card = Card.pentacles.find do |card|
 card.value_int == user_input.to_i
 end
 system("clear")
 @current_card.info
-elsif suit == "swords"
+prompt_for_input_minor(@suit)
+elsif @suit == "swords"
 @current_card = Card.swords.find do |card|
 card.value_int == user_input.to_i
 end
-system("clear")
-@current_card.info
+end
 else
 puts "Invalid input, please pick a valid card"
-puts "Ex: '1' would give you 'Ace of #{suit}'"
-get_card_minor(suit)
+puts "Please choose a suit and card again"
+sleep(1)
+minor_menu
 end
-prompt_for_input_minor(suit)
 end
 
 
@@ -180,12 +190,13 @@ puts "Ex: '1' would give you 'The Magician'"
 puts ""
 puts ""
 get_card
-prompt_for_input_major
 end
 
 
 def get_card
   user_input = gets.strip
+  major_range = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"]
+  if major_range.include?(user_input)
   @current_card = Card.major.find do |card|
   card.value_int == user_input.to_i
   end
@@ -193,6 +204,11 @@ def get_card
   @current_card.info
   if @current_card.type == "major"
   prompt_for_input_major
+end
+else
+  puts "Invalid input. Please choose a valid card."
+  sleep(1)
+  print_major_arcana
 end
 end
 
